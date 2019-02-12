@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class AddCategory extends Component {
+class CategoryAdd extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,7 +34,7 @@ class AddCategory extends Component {
                     <label>Id: </label><input type="number" value = {this.state.id} name="id" onChange={this.inputChanged}></input>                    
                     <label>Name: </label><input type="text" value = {this.state.name} name="name" onChange={this.inputChanged}></input>
                     <label>Budget: </label><input type="number" value = {this.state.budget} name="budget" onChange={this.inputChanged}></input>
-                    <input type="button" onClick={this.saveCategory} value="SAVE" />
+                    <input type="button" onClick={this.saveCategory} value="ADD" />
                 </form>
 
             </div>
@@ -42,4 +42,4 @@ class AddCategory extends Component {
     }
 }
 
-export default AddCategory;
+export default CategoryAdd;
