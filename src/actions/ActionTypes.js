@@ -1,4 +1,5 @@
 const ActionTypes = {
+<<<<<<< HEAD
   CATEGORIES_ALL_REQ: "CATEGORIES_ALL_REQ",
   CATEGORIES_ALL_OK: "CATEGORIES_ALL_OK",
   CATEGORIES_ALL_X: "CATEGORIES_ALL_X",
@@ -8,3 +9,12 @@ const ActionTypes = {
   CATEGORY_ADD_X: "CATEGORY_ADD_X"
 };
 export default ActionTypes;
+=======
+
+    CATEGORIES_ALL_REQ: 'CATEGORIES_ALL_REQ',
+    CATEGORIES_ALL_OK: 'CATEGORIES_ALL_OK',
+    CATEGORIES_ALL_X: 'CATEGORIES_ALL_X',
+};
+
+export default ActionTypes;
+>>>>>>> c7a4832db146f6aad0f293b850d7968165104992
