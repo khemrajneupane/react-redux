@@ -1,43 +1,47 @@
-import React, { Component } from 'react';
-import {fetchAllCategories} from '../../actions/category';
-import CategoryListItems from './CategoryListItems';
-import {connect} from 'react-redux';
-//import {fetchTestCategories, fetchAllCategories} from '../../actions/category';
-//This CategoryList gets (mounts) all the object instances called in FetchTestCategories function
-//later, it puts them in an unordered list.
+import React, { Component } from "react";
+//import { fetchTestCategories as oldOne } from '../../models/Test';
+import { fetchAllCategories } from "../../actions/category";
+import CategoryListItem from "./CategoryListItem";
+import { connect } from "react-redux";
+
 class CategoryList extends Component {
-   /* constructor(props) {
-        super(props);
-        //this.state = { Categories: [] };
-    }*/
-    componentDidMount() {
-        this.props.categoriesFetchAll();
-        //this.setState({
-        //    Categories: FetchTestCategories()
-       // })
+  /*
+    constructor(props) {
+      super(props);
+      //this.state = { categories: [] };
     }
-    
+    */
 
+  componentDidMount() {
+    //this.setState({ categories: fetchTestCategories() });
+    this.props.categoriesFetchAll();
+  }
 
-    render() {
-        const mycategories = this.props.categories.categoryList.map((item, index) => {
-
-            return <CategoryListItems item={item} index={index} />
-        });
-
-        return (
-            <div>
-                <ul>{mycategories}</ul>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <h4>List of Categories</h4>
+        <ol>
+          {this.props.categories.categoryList.map(item => (
+            <CategoryListItem key={item.id} item={item} />
+          ))}
+        </ol>
+      </div>
+    );
+  }
 }
-const mapDispatchToProps = dispatch =>({
-    categoriesFetchAll: ()=>{
-        dispatch(fetchAllCategories())
-    }
-})
+
+const mapDispatchToProps = dispatch => ({
+  categoriesFetchAll: () => {
+    dispatch(fetchAllCategories());
+  }
+});
+
 const mapStateToProps = state => ({
-    categories: state.categories,
-  });
-export default connect(mapStateToProps,mapDispatchToProps)(CategoryList);
+  categories: state.categories
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CategoryList);

@@ -1,45 +1,62 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addCategory } from "../../actions/category";
 
 class CategoryAdd extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            id: 0,
-            name: "",
-            budget: 0
-        };
-    }
-    inputChanged =event=>{
-        this.setState({
-            [event.target.name]:event.target.value
-        })
-    }
-    saveCategory = event =>{
-        event.preventDefault();
-        this.setState({
-            id:this.state.id,
-            name:this.state.name,
-            budget:this.state.budget
-        })
- 
-        
-        console.log(this.state);
-    }
-    render() {
-        const addedList =(<li>{this.state.id},{this.state.name},{this.state.budget}</li>);
-        return (
-            <div>
-                <ul>{addedList}</ul>
-                <form>
-                    <label>Id: </label><input type="number" value = {this.state.id} name="id" onChange={this.inputChanged}></input>                    
-                    <label>Name: </label><input type="text" value = {this.state.name} name="name" onChange={this.inputChanged}></input>
-                    <label>Budget: </label><input type="number" value = {this.state.budget} name="budget" onChange={this.inputChanged}></input>
-                    <input type="button" onClick={this.saveCategory} value="ADD" />
-                </form>
+  constructor(props) {
+    super(props);
+    this.state = {
+      newCategoryObject: { id: null, name: null, budget: null }
+    };
+  }
+  inputFieldValueChanged = event => {
+    this.setState({
+      newCategoryObject: {
+        ...this.state.newCategoryObject,
+        [event.target.id]: event.target.value
+      }
+    });
+  };
+  addCategoryButtonClicked = () => {
+    const category = this.state.newCategoryObject;
+    this.props.addCategoryLocal(category);
 
-            </div>
-        );
-    }
+    // this.props.addCategoryLocal(this.state.newCategoryObject);   // Other way
+  };
+  render = () => {
+    return (
+      <div>
+        <h4>New Category</h4>
+        <p>
+          Id:{" "}
+          <input id="id" type="text" onChange={this.inputFieldValueChanged} />
+          <br />
+          Name:{" "}
+          <input id="name" type="text" onChange={this.inputFieldValueChanged} />
+          <br />
+          Budget:{" "}
+          <input
+            id="budget"
+            type="text"
+            onChange={this.inputFieldValueChanged}
+          />
+          <br />
+          <button type="button" onClick={this.addCategoryButtonClicked}>
+            ADD NEW CATEGORY
+          </button>
+        </p>
+      </div>
+    );
+  };
 }
 
-export default CategoryAdd;
+const mapDispatchToProps = dispatch => ({
+  addCategoryLocal: category => {
+    dispatch(addCategory(category));
+  }
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(CategoryAdd);
